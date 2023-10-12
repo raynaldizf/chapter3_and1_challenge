@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_huruf.*
+import com.example.chapter3_and1_challenge.databinding.FragmentHurufBinding
 
 class HurufFragment : Fragment() {
+    lateinit var binding : FragmentHurufBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_huruf, container, false)
+        binding = FragmentHurufBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,8 +40,9 @@ class HurufFragment : Fragment() {
         var adapterHuruf = HurufAdapter(listHuruf)
         val lm = GridLayoutManager(context, 1)
 
-        rvHuruf.layoutManager = lm
-        rvHuruf.adapter = adapterHuruf
+        binding.rvHuruf.layoutManager = lm
+        binding.rvHuruf.adapter = adapterHuruf
+
 
         adapterHuruf.onClick = {
             val bundle = Bundle()
@@ -47,10 +51,8 @@ class HurufFragment : Fragment() {
             val fragment = KataFragment()
             fragment.arguments = bundle
 
-            parentFragmentManager.beginTransaction().apply {
-                replace(R.id.fcHuruf, fragment)
-                .commit()
-            }
+            findNavController().navigate(R.id.action_hurufFragment_to_kataFragment,bundle)
+
         }
     }
 }

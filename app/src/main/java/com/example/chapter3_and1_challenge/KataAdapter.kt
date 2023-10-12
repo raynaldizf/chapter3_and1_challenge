@@ -30,7 +30,6 @@ class KataAdapter(private val listKata: ArrayList<String>) : RecyclerView.Adapte
         holder.huruf.text = listKata[position]
         var kata = holder.huruf.text
         holder.card.setOnClickListener{
-
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=${kata}"))
             it.context.startActivity(intent)
         }

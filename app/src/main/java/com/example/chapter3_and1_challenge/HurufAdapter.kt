@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-
 class HurufAdapter(val listHuruf : ArrayList<Huruf>) : RecyclerView.Adapter<HurufAdapter.ViewHolder>(){
     var onClick : ((Huruf) -> Unit)? = null
 

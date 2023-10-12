@@ -3,20 +3,20 @@ package com.example.chapter3_and1_challenge
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Huruf(val huruf : Char, val kata : ArrayList<String>) : Parcelable {
+data class Huruf(val huruf: Char, val kata: ArrayList<String>) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt().toChar(),
         parcel.createStringArrayList()!!
     ) {
     }
 
-    override fun describeContents(): Int {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(huruf.toInt())
+        parcel.writeStringList(kata)
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest!!.writeInt(huruf.toInt())
-        dest.writeStringList(kata)
+    override fun describeContents(): Int {
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<Huruf> {
